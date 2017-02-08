@@ -115,3 +115,10 @@ nav {
 textarea {
 	min-height: 250px;
 }
+
+
+// Bootstrap adjustment
+
+.table > tbody > tr > td {
+	vertical-align: middle;
+}

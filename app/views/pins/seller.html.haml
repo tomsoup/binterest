@@ -1,10 +1,39 @@
-.col-md-12
-  #pins.transitions-enabled
-    - @pins.each do |pin|
-      .box.panel.panel-default
-        = link_to (image_tag pin.image.url(:medium)), pin
-        .panel-body
-          %h2= link_to pin.title, pin
-          %p.user
-          Submitted by
-          = "#{pin.user.first_name.capitalize} #{pin.user.last_name.capitalize[0]}."
+.table-responsive
+  %table.table.table-hover.table-condensed
+    %thead
+      %tr
+        %th Image
+        %th Title
+        %th Description
+        %th Price
+        %th Action
+        - if user_signed_in?
+          %th{:colspan => "1"}
+    %tbody
+      - @pins.each do |pin|
+        %tr
+          %td= link_to (image_tag pin.image.url(:thumb)), pin
+          %td= pin.title
+          %td= pin.description
+          %td= number_to_currency(pin.price)
+          - if user_signed_in?
+            %td
+              .btn-group
+                %button.btn.btn-primary.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  Action
+                  %span.caret
+                %ul.dropdown-menu
+                  %li= link_to 'Show', pin_path(pin)
+                  %li= link_to 'Edit', edit_pin_path(pin)
+                  %li= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' }
+
+
+
+
+
+
+
+  %br/
+
+- if user_signed_in?
+  = link_to 'New Pin', new_pin_path, class: "btn btn-info"
