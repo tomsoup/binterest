@@ -1,0 +1,27 @@
+.text-center
+  %h1
+    %strong
+      = "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize[0]}. Purchase history"
+.table-responsive
+  %table.table.table-hover.table-condensed
+    %thead
+      %tr
+        %th Image
+        %th Item
+        %th Price
+        %th Seller
+        %th Date Sold
+    %tbody
+      - @orders.each do |order|
+        %tr
+          %td= link_to (image_tag order.pin.image.url(:thumb))
+          %td= order.pin.title
+          %td= number_to_currency(order.pin.price)
+          %td= "#{order.seller.first_name.capitalize} #{order.seller.last_name.capitalize[0]}."
+          %td= order.created_at.strftime("%B %-d, %Y")
+
+
+
+
+
+  %br/
