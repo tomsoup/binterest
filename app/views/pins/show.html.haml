@@ -1,14 +1,11 @@
-#pin_show.row
+#pin_show
   .col-md-8.col-md-offset-2
     .panel.panel-default
       .panel-heading.pin_image
-        -# = image_tag @pin.image.url(:medium)
+        = image_tag @pin.image.url(:medium)
       .panel-body
         %h1= @pin.title
         %p.description= @pin.description
-        %p
-        Submitted by
-        = @pin.user.email
       .panel-footer
         .row
           .col-md-6

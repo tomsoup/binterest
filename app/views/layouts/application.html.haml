@@ -20,8 +20,9 @@
           %li= link_to "Sign Up", new_user_registration_path
           %li= link_to "Sign In", new_user_session_path
   .container
-    %p.notice= notice
-    %p.alert= alert
-    - flash.each do |name, msg|
-      =content_tag  :div, msg, class: "alert alert-info"
-    = yield
+    .row
+      - flash.each do |name, msg|
+        =content_tag  :div, msg, class: "alert alert-info"
+      = yield
+    %footer
+      %p © Tom 2017
