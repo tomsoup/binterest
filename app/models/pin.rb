@@ -2,7 +2,7 @@ class Pin < ActiveRecord::Base
   acts_as_votable
   belongs_to :user
 
-  has_attached_file :image, :styles => {  medium: "200x", thumb: "100x100>"  }
+  has_attached_file :image, :styles => {  medium: "250x", thumb: "150x>"  }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   validates :title, :description, :image, presence: true
