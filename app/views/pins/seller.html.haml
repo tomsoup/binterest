@@ -1,0 +1,10 @@
+.col-md-12
+  #pins.transitions-enabled
+    - @pins.each do |pin|
+      .box.panel.panel-default
+        = link_to (image_tag pin.image.url(:medium)), pin
+        .panel-body
+          %h2= link_to pin.title, pin
+          %p.user
+          Submitted by
+          = "#{pin.user.first_name.capitalize} #{pin.user.last_name.capitalize[0]}."

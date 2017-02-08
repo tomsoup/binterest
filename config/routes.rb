@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
+  match '/seller' => "pins#seller", via: :get, as: :seller
 
  root "pins#index"
 end

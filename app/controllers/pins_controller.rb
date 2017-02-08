@@ -7,6 +7,10 @@ class PinsController < ApplicationController
     @pins = Pin.all.order('created_at DESC')
   end
 
+  def seller
+    @pins = Pin.where(user: current_user).order('created_at DESC')
+  end
+
   def new
     @pin = Pin.new
   end
