@@ -1,6 +1,7 @@
 class PinsController < ApplicationController
   before_action :find_pin, only: [:show, :edit, :update, :destroy, :upvote]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :check_user, only: [:destroy, :update, :edit]
 
   def index
     @pins = Pin.all.order('created_at DESC')
@@ -53,5 +54,11 @@ class PinsController < ApplicationController
 
   def find_pin
     @pin = Pin.find(params[:id])
+  end
+
+  def check_user
+    if current_user != @pin.user
+      redirect_to root_url, alert: "Sorry, this pin belongs to someone else"
+    end
   end
 end

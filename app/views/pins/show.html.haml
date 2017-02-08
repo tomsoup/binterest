@@ -19,5 +19,6 @@
                 %span.glyphicon.glyphicon-heart
                   = @pin.get_upvotes.size
               - if user_signed_in?
-                = link_to "Edit", edit_pin_path, class: "btn btn-default"
-                = link_to "Delete", pin_path, method: :delete, data: { confirm: "are you sure?"}, class: "btn btn-default"
+                - if (@pin.user == current_user)
+                  = link_to "Edit", edit_pin_path, class: "btn btn-default"
+                  = link_to "Delete", pin_path, method: :delete, data: { confirm: "are you sure?"}, class: "btn btn-default"
