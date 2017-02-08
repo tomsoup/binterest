@@ -1,6 +1,8 @@
 class Pin < ActiveRecord::Base
   acts_as_votable
+  has_many :orders
   belongs_to :user
+
   if Rails.env.development?
     has_attached_file :image, styles: { medium: '250x', thumb: '150x' }, default_url: 'default.jpg'
   else

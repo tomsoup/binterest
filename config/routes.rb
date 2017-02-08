@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :orders
   devise_for :users
   resources :pins do
+    resources :orders
+    # , :only => [:show, :update, :edit]
     member do
       put "like", to: "pins#upvote"
     end
