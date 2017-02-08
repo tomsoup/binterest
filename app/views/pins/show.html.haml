@@ -2,9 +2,10 @@
   .col-md-8.col-md-offset-2
     .panel.panel-default
       .panel-heading.pin_image
-        = image_tag @pin.image.url(:medium)
+        = image_tag @pin.image.url
       .panel-body
         %h1= @pin.title
+        %h3= number_to_currency(@pin.price)
         %p.description= @pin.description
       .panel-footer
         .row
