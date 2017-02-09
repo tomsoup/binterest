@@ -1,0 +1,31 @@
+.row
+  .col-md-4
+    .thumbnail
+      = image_tag @pin.image.url
+      %h3
+        = @pin.title
+      %h4=number_to_currency(@pin.price)
+  .col-md-8
+    = simple_form_for([@pin, @order]) do |f|
+      = f.error_notification
+      .form-inputs
+        = f.input :address
+        = f.input :city
+        = f.input :state
+        = f.input :zip_code
+        = f.input :card_holder, :label => "Cardholder", :placeholder => "Full Name", :input_html => {:autocomplete => :off, :size => 20, :id => "card-name", :name => ""}, :class => "pull-left"
+        .row
+          = f.input :card_number, :label => "Card Number", :input_html => {:autocomplete => :off, :size => 20, :id => "card-number", :name => ""}, wrapper_html: { class: 'col-md-9' }
+          = f.input :card_cvc, :label => "CVC", :placeholder => "This 3- or 4-digit code is usually found on the back of your credit card", :input_html => {:autocomplete => :off, :size => 20, :id => "card-cvc", :name => ""}, wrapper_html: { class: 'col-md-3' }
+        .control-group.string.required
+          %label.string.required.control-label{:for => "card-expiry-month"}
+            %abbr{:title => "required"}*
+            Expiration Date
+        .controls.row
+          .col-md-6
+            = select_month nil, { user_two_digit_numbers: true}, {:name => nil, :'data-stripe' => "exp-month", class: "form-control"}
+          .col-md-6
+            = select_year nil, { start_year: Date.today.year, end_year: Date.today.year+10 }, { :name => nil, :'data-stripe' => "exp-year", class: "form-control" }
+      %br
+      .form-actions
+        = f.button :submit
