@@ -53,7 +53,7 @@ class PinsController < ApplicationController
   private
 
   def pin_params
-    params.require(:pin).permit(:title, :description, :image, :price, :user_id)
+    params.require(:pin).permit(:title, :price, :description, :image, :user_id)
   end
 
   def find_pin
@@ -62,7 +62,7 @@ class PinsController < ApplicationController
 
   def check_user
     if current_user != @pin.user
-      redirect_to root_url, alert: "Sorry, this pin belongs to someone else"
+      redirect_to root_url, alert: 'Sorry, this pin belongs to someone else'
     end
   end
 end
