@@ -12,7 +12,11 @@ class Pin < ActiveRecord::Base
                               :path => ":style/:id_:filename"
   end
 
+
+
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
+  attr_accessor :countries, :routing_number, :account_number
 
   validates :title, :description, :image, :price, presence: true
   validates :price, numericality: { greater_than: 0 }

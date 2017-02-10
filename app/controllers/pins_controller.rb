@@ -19,6 +19,30 @@ class PinsController < ApplicationController
     @pin = Pin.new(pin_params)
     @pin.user = current_user
 
+    if current_user.recipient.blank?
+
+      Stripe.api_key = ENV['STRIPE_API_KEY']
+      token = params[:stripeToken]
+
+      recipient = Stripe::Account.create(
+        {
+          :country => "US",
+          :managed => true
+        }
+      )
+
+      account = Stripe::Account.retrieve(recipient.id)
+
+
+      account.external_accounts.create({
+        :bank_account => token
+      })
+
+    end
+    
+    current_user.recipient = recipient.id
+    current_user.save
+
     if @pin.save
       redirect_to @pin, notice: 'Successfully created new Pin!'
     else

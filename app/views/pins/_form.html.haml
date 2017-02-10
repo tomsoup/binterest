@@ -1,4 +1,4 @@
-= simple_form_for @pin, html: { multipart: true} do |f|
+= simple_form_for @pin, html: { multipart: true } do |f|
   - if @pin.errors.any?
     #errors.alert.alert-danger.alert-dissmissable
       %h2
@@ -7,6 +7,9 @@
       %ul
         -@pin.errors.full_messages.each do |msg|
           %li= msg
+  #stripe_error.alert.alert-danger{:style => "display: none"}
+    %noscript
+      Javascript is required for this form, Please enable it in your browser setting
   .form-group
     = f.input :title, input_html: {class: 'form-control'}
 
@@ -18,4 +21,21 @@
 
   .form-group
     = f.input :description, input_html: {class: 'form control'}
+
+
+  - if current_user.recipient.blank?
+    %br
+    %h1
+      Bank Account Info
+
+    .form-group
+      = f.input :countries, :label => "Country", :input_html => {:autocomplete => :off, :size => 20, :id => "country", :name => nil, :'data-stripe' => "country", class: 'form-control' }
+
+    .form-group
+      = f.input :routing_number, :label => "Routing Number", :input_html => {:autocomplete => :off, :size => 20, :id => "routing-number", :name => nil, :'data-stripe' => "routingNumber", class: 'form-control' }
+
+    .form-group
+      = f.input :account_number, :label => "Account Number", :input_html => {:autocomplete => :off, :size => 20, :id => "account-number", :name => nil, :'data-stripe' => "accountNumber", class: 'form-control' }
+
+
   = f.button :submit, class: "btn btn-primary"
