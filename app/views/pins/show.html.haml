@@ -13,7 +13,7 @@
           .col-md-6
             %p.user
             Submitted by
-            = @pin.user.email
+            = "#{@pin.user.first_name.capitalize} #{@pin.user.last_name.capitalize[0]}."
           .col-md-6
             .btn-group.pull-right
               = link_to like_pin_path(@pin), method: :put, class: "btn btn-default" do
