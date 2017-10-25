@@ -6,7 +6,7 @@ class Pin < ActiveRecord::Base
   # if Rails.env.development?
   #   has_attached_file :image, styles: { medium: '250x', thumb: '150x' }, default_url: 'default.jpg'
   # else
-    has_attached_file :image, styles: { medium: '250x', thumb: '150x' }, default_url: 'default.jpg',
+    has_attached_file :image, styles: { medium: '250x', thumb: '150x' }, default_url: 'default.jpg'
   # end
 
 
