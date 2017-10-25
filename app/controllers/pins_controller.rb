@@ -39,7 +39,7 @@ class PinsController < ApplicationController
       })
 
     end
-    
+
     current_user.recipient = recipient.id
     current_user.save
 
@@ -77,7 +77,7 @@ class PinsController < ApplicationController
   private
 
   def pin_params
-    params.require(:pin).permit(:title, :price, :description, :image, :user_id)
+    params.require(:pin).permit(:title, :price, :description, :image)
   end
 
   def find_pin
