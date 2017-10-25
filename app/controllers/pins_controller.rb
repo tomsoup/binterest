@@ -40,7 +40,7 @@ class PinsController < ApplicationController
 
     end
 
-    current_user.recipient = recipient.id
+    current_user.recipient = recipient
     current_user.save
 
     if @pin.save
