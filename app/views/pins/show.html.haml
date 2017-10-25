@@ -7,7 +7,8 @@
         %h1= @pin.title
         %h3= number_to_currency(@pin.price)
         %p.description= @pin.description
-        = link_to "Buy It Now", new_pin_order_path(@pin), class: "btn btn-primary"
+        - unless (@pin.user == current_user)
+          = link_to "Buy It Now", new_pin_order_path(@pin), class: "btn btn-primary"
       .panel-footer
         .row
           .col-md-6
